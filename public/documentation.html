@@ -12,10 +12,146 @@ a list of their favourite movies.-->
   <head>
     <meta charset="utf-8" />
     <title>Documentation</title>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css" />
   </head>
   <body>
+    <h1>
+      myFlix App
+    </h1>
+    <h3>
+      Create a REST API with Node.js & Express
+    </h3>
     <p>
-      Documentation
+      This API will provide users with access to information about different
+      movies, directors, and genres.
     </p>
+    <p>
+      Users will be able to sign up, update their personal information, and
+      create a list of their favourite movies.
+    </p>
+    <main>
+      <table class="table">
+        <tr>
+          <th>Business logic</th>
+          <th>URL</th>
+          <th>HTTP Method</th>
+          <th>Request body data format</th>
+          <th>Response body data format</th>
+        </tr>
+        <tr>
+          <td>Return a list of all movies</td>
+          <td>/movies</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>a JSON object holding data about all the movies</td>
+        </tr>
+        <tr>
+          <td>Return data about a single movie by title to the user</td>
+          <td>/movies/:title</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>
+            a JSON object holding data about a single movie (description, genre,
+            director, image URL, whether it’s featured or not) <br />
+            Example: <br />
+            { <br />
+            id: 1 <br />
+            title: The Big Lebowski, <br />
+            genre: Comedy, <br />
+            director: Cohen Brothers, <br />
+            image URL: some-image.png, <br />
+            description: The Big Lebowski is a Cohen Brothers film starring...,
+            <br />
+            featured: True <br />
+            myFavourites: [] <br />
+            }
+          </td>
+        </tr>
+        <tr>
+          <td>Return data about a genre by title</td>
+          <td>/movies/genre/:title</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>Text message indicating information about the specific genre</td>
+        </tr>
+        <tr>
+          <td>Return data about a director by name</td>
+          <td>movies/director/:name</td>
+          <td>GET</td>
+          <td>None</td>
+          <td>Text message indicating information about the director</td>
+        </tr>
+        <tr>
+          <td>Allow new users to register</td>
+          <td>/user</td>
+          <td>POST</td>
+          <td>
+            A JSON object holding data about the new user. <br />
+            Example: <br />
+            { <br />
+            username: mitchellzilberg,<br />
+            password: password123,<br />
+            email: mz26@live.ca<br />
+            }
+          </td>
+          <td>
+            A JSON object holding data about the new user that was added,
+            including an ID. <br />
+            Example: <br />
+            { <br />
+            id: 1, <br />
+            username: mitchellzilberg,<br />
+            password: password123,<br />
+            email: mz26@live.ca<br />
+            }
+          </td>
+        </tr>
+        <tr>
+          <td>Allow users to update their user info (username)</td>
+          <td>/user/:userName</td>
+          <td>PUT</td>
+          <td>
+            A JSON object holding data with the new username <br />
+            Example: <br />
+            { <br />
+            username: mitchellzilberg2,<br />
+            password: password123,<br />
+            email: mz26@live.ca,<br />
+            myFavourites: [] <br />
+            }
+          </td>
+          <td>A text message indicating the updated user name</td>
+        </tr>
+        <tr>
+          <td>Allow users to add a movie to their list of favorites</td>
+          <td>/user/:newFavourite</td>
+          <td>POST</td>
+          <td>None</td>
+          <td>
+            Text message indicating that the movie has been added to the list of
+            favourite movies.
+          </td>
+        </tr>
+        <tr>
+          <td>Allow users to remove a movie from their list of favorites</td>
+          <td>/movies/:myFavourites</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>
+            Text message indicating that the movie has been removed from the
+            list of favourite movies.
+          </td>
+        </tr>
+        <tr>
+          <td>Allow existing users to deregister</td>
+          <td>/user/account/:userName</td>
+          <td>DELETE</td>
+          <td>None</td>
+          <td>
+            Text message indicating that the user's account has been deleted
+          </td>
+        </tr>
+      </table>
+    </main>
   </body>
 </html>
