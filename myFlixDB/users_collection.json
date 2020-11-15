@@ -1,0 +1,4 @@
+{"_id":{"$oid":"5fb00cbab9d382068268beb5"},"Username":"Mitchell Zilberg","Password":"2345","Email":"mz26@live.ca","Birthday":"1997-02-10","FavouriteMovies":[{"$oid":"5fb12005b9d382068268bebe"},{"$oid":"5fb11f87b9d382068268bebd"},{"$oid":"5fb11bd1b9d382068268bebb"}]}
+{"_id":{"$oid":"5fb1224cb9d382068268bebf"},"Username":"Joe Two","Password":"1111","Email":"user2@live.ca","Birthday":"1995-62-11","FavouriteMovies":[{"$oid":"5fb11f19b9d382068268bebc"},{"$oid":"5fb11bd1b9d382068268bebb"}]}
+{"_id":{"$oid":"5fb12274b9d382068268bec0"},"Username":"Joe Three","Password":"3333","Email":"user3@live.ca","Birthday":"1970-10-08","FavouriteMovies":[{"$oid":"5fb11b73b9d382068268beba"},{"$oid":"5fb11aecb9d382068268beb9"}]}
+{"_id":{"$oid":"5fb12293b9d382068268bec1"},"Username":"Joe Four","Password":"4444","Email":"user4@live.ca","Birthday":"1980-12-30","FavouriteMovies":[{"$oid":"5fb11a3db9d382068268beb8"},{"$oid":"5fb119b2b9d382068268beb7"}]}
