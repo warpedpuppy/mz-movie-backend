@@ -76,14 +76,14 @@ a list of their favourite movies.-->
         </tr>
         <tr>
           <td>Return data about a director by name</td>
-          <td>movies/director/:name</td>
+          <td>/movies/director/:name</td>
           <td>GET</td>
           <td>None</td>
           <td>Text message indicating information about the director</td>
         </tr>
         <tr>
           <td>Allow new users to register</td>
-          <td>/user</td>
+          <td>/users</td>
           <td>POST</td>
           <td>
             A JSON object holding data about the new user. <br />
@@ -108,7 +108,7 @@ a list of their favourite movies.-->
         </tr>
         <tr>
           <td>Allow users to update their user info (username)</td>
-          <td>/user/:userName</td>
+          <td>/users/:username</td>
           <td>PUT</td>
           <td>
             A JSON object holding data with the new username <br />
@@ -124,7 +124,7 @@ a list of their favourite movies.-->
         </tr>
         <tr>
           <td>Allow users to add a movie to their list of favorites</td>
-          <td>/user/:newFavourite</td>
+          <td>/users/:FavouriteMovies</td>
           <td>POST</td>
           <td>None</td>
           <td>
@@ -134,7 +134,7 @@ a list of their favourite movies.-->
         </tr>
         <tr>
           <td>Allow users to remove a movie from their list of favorites</td>
-          <td>/movies/:myFavourites</td>
+          <td>/users/:FavouriteMovies</td>
           <td>DELETE</td>
           <td>None</td>
           <td>
@@ -144,7 +144,7 @@ a list of their favourite movies.-->
         </tr>
         <tr>
           <td>Allow existing users to deregister</td>
-          <td>/user/account/:userName</td>
+          <td>/users/account/:username</td>
           <td>DELETE</td>
           <td>None</td>
           <td>
