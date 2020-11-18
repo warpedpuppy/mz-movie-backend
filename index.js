@@ -71,8 +71,9 @@ app.get("/movies/genre/:Name", (req, res) => {
 //Returns data about a specific director by director name
 app.get("/movies/director/:Name", (req, res) => {
   Movies.find({ "Director.Name": req.params.Name })
-    .then(director => {
-      res.json(director);
+    .then(movies => {
+      //director
+      res.json(movies); //directors
     })
     .catch(err => {
       console.error(err);
