@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
 app.get("/movies", (req, res) => {
   Movies.find()
     .then(movies => {
-      res.status(201).json(movies);
+      res.status(200).json(movies);
     })
     .catch(err => {
       console.error(err);
@@ -56,10 +56,11 @@ app.get("/movies/:Title", (req, res) => {
 });
 
 //Returns data about a specific genre by genre name
-app.get("movies/genre/:Name", (req, res) => {
-  Movies.find({ "Genres.Name": req.params.Name })
-    .then(genre => {
-      res.json(genre.Description);
+app.get("/movies/genre/:Name", (req, res) => {
+  Movies.find({ "Genre.Name": req.params.Name })
+    .then(movies => {
+      //genres =>
+      res.json(movies); //genre.Description
     })
     .catch(err => {
       console.error(err);
@@ -68,8 +69,8 @@ app.get("movies/genre/:Name", (req, res) => {
 });
 
 //Returns data about a specific director by director name
-app.get("movies/director/:Name", (req, res) => {
-  Movies.find({ "Directors.Name": req.params.Name })
+app.get("/movies/director/:Name", (req, res) => {
+  Movies.find({ "Director.Name": req.params.Name })
     .then(director => {
       res.json(director);
     })
@@ -83,7 +84,7 @@ app.get("movies/director/:Name", (req, res) => {
 app.get("/users", (req, res) => {
   Users.find()
     .then(users => {
-      res.status(201).json(users);
+      res.status(200).json(users);
     })
     .catch(err => {
       console.error(err);
@@ -117,7 +118,7 @@ app.post("/users", (req, res) => {
           Birthday: req.body.Birthday
         })
           .then(user => {
-            res.status(201).json(user);
+            res.status(200).json(user);
           })
           .catch(error => {
             console.error(error);
