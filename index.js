@@ -4,6 +4,8 @@ const Models = require("./models.js");
 
 const Movies = Models.Movie;
 const Users = Models.User;
+const Genres = Models.Movie.Genre;
+const Directors = Models.Movie.Director;
 
 mongoose.connect("mongodb://localhost:27017/myFlixDB", {
   useNewUrlParser: true,
@@ -55,12 +57,11 @@ app.get("/movies/:Title", (req, res) => {
     });
 });
 
-//Returns data about a specific genre by genre name
+// Returns data about a specific genre by genre name
 app.get("/movies/genre/:Name", (req, res) => {
-  Movies.find({ "Genre.Name": req.params.Name })
+  Movies.findOne({ "Genre.Name": req.params.Name })
     .then(movies => {
-      //genres =>
-      res.json(movies); //genre.Description
+      res.json(movies.Genre.Name + ", " + movies.Genre.Description);
     })
     .catch(err => {
       console.error(err);
@@ -68,12 +69,20 @@ app.get("/movies/genre/:Name", (req, res) => {
     });
 });
 
-//Returns data about a specific director by director name
 app.get("/movies/director/:Name", (req, res) => {
-  Movies.find({ "Director.Name": req.params.Name })
+  Movies.findOne({ "Director.Name": req.params.Name })
     .then(movies => {
-      //director
-      res.json(movies); //directors
+      res.json(
+        "Name: " +
+          movies.Director.Name +
+          ". Bio: " +
+          movies.Director.Bio +
+          " Birth: " +
+          movies.Director.Birth +
+          ". Death: " +
+          movies.Director.Death +
+          "."
+      );
     })
     .catch(err => {
       console.error(err);
