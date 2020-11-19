@@ -72,14 +72,14 @@ a list of their favourite movies.-->
           <td>/movies/genre/:Name</td>
           <td>GET</td>
           <td>None</td>
-          <td>Text message indicating information about the specific genre</td>
+          <td>JSON object with all movies with specified genre</td>
         </tr>
         <tr>
           <td>Return data about a director by name</td>
           <td>/movies/director/:Name</td>
           <td>GET</td>
           <td>None</td>
-          <td>Text message indicating information about the director</td>
+          <td>JSON object with all movies with specified director</td>
         </tr>
         <tr>
           <td>Allow new users to register</td>
@@ -107,11 +107,11 @@ a list of their favourite movies.-->
           </td>
         </tr>
         <tr>
-          <td>Allow users to update their user info (username)</td>
+          <td>Allow users to update their user info</td>
           <td>/users/:Username</td>
           <td>PUT</td>
           <td>
-            A JSON object holding data with the new username <br />
+            A JSON object holding data with the new user info <br />
             Example: <br />
             { <br />
             username: mitchellzilberg2,<br />
@@ -120,31 +120,52 @@ a list of their favourite movies.-->
             myFavourites: [] <br />
             }
           </td>
-          <td>A text message indicating the updated user name</td>
+          <td>
+            A JSON object holding data with the new user info <br />
+            Example: <br />
+            { <br />
+            username: mitchellzilberg2,<br />
+            password: password123,<br />
+            email: mz26@live.ca,<br />
+            FavouriteMovies: [] <br />
+            }
+          </td>
         </tr>
         <tr>
           <td>Allow users to add a movie to their list of favorites</td>
-          <td>/users/:FavouriteMovies</td>
+          <td>/users/:Username/Movies/:MovieID</td>
           <td>POST</td>
           <td>None</td>
           <td>
-            Text message indicating that the movie has been added to the list of
-            favourite movies.
+            JSON object with user info and updated FavouriteMovies array. <br />
+            Example: <br />
+            { <br />
+            username: mitchellzilberg2, <br />
+            password: password123, <br />
+            email: mz26@live.ca, <br />
+            myFavourites: [fewberfuwif] <br />
+            }
           </td>
         </tr>
         <tr>
           <td>Allow users to remove a movie from their list of favorites</td>
-          <td>/users/:FavouriteMovies</td>
+          <td>/users/:Username/Movies/:MovieID</td>
           <td>DELETE</td>
           <td>None</td>
           <td>
-            Text message indicating that the movie has been removed from the
-            list of favourite movies.
+            JSON object with user info and updated FavouriteMovies array. <br />
+            Example: <br />
+            { <br />
+            username: mitchellzilberg2, <br />
+            password: password123, <br />
+            email: mz26@live.ca, <br />
+            myFavourites: [] <br />
+            }
           </td>
         </tr>
         <tr>
           <td>Allow existing users to deregister</td>
-          <td>/users/account/:Username</td>
+          <td>/users/:Username</td>
           <td>DELETE</td>
           <td>None</td>
           <td>
