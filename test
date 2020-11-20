@@ -1,0 +1,3 @@
+mongoimport --uri mongodb+srv://MitchellZilberg:Stlouis26@mitchellzilberg.nwwhf.mongodb.net/myFlixDB --collection users_collection.json --type json --file /Users/Mitch/Desktop/Web_dev/careerfoundry/exported_collections/users_collection.json
+
+mongo "mongodb+srv://mitchellzilberg.nwwhf.mongodb.net/myFlixDB" --username MitchellZilberg
