@@ -48,7 +48,8 @@ let movies = [];
 //Favourite movies
 let FavouriteMovies = [];
 
-let allowedOrigins = ["https://localhost:8080", "http://testsite.com"];
+//Allows all domains to make api requests
+let allowedOrigins = ["*"];
 
 app.use(
   cors({
