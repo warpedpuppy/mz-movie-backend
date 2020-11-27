@@ -5,15 +5,17 @@ const Models = require("./models.js");
 const Movies = Models.Movie;
 const Users = Models.User;
 
-// mongoose.connect("mongodb://localhost:27017/myFlixDB", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// });
-
-mongoose.connect(process.env.CONNECTION_URI, {
+//Local database
+mongoose.connect("mongodb://localhost:27017/myFlixDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+//Remote database
+// mongoose.connect(process.env.CONNECTION_URI, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// });
 
 const express = require("express"),
   morgan = require("morgan"),
@@ -41,33 +43,40 @@ let movies = [];
 let FavouriteMovies = [];
 
 //Allows all domains to make api requests
-let allowedOrigins = ["*"];
+let allowedOrigins = ["http://localhost:1234"];
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) === -1) {
-        // If a specific origin isn’t found on the list of allowed origins
-        let message =
-          "The CORS policy for this application doesn’t allow access from origin " +
-          origin;
-        return callback(new Error(message), false);
-      }
-      return callback(null, true);
-    }
+    origin: "*",
   })
 );
+
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       if (!origin) return callback(null, true);
+//       if (allowedOrigins.indexOf(origin) === -1) {
+//         // If a specific origin isn’t found on the list of allowed origins
+//         let message =
+//           "The CORS policy for this application doesn’t allow access from origin " +
+//           origin;
+//         return callback(new Error(message), false);
+//       }
+//       return callback(null, true);
+//     }
+//   })
+// );
 
 //Home page
 app.get("/", (req, res) => {
   res.send("Welcome to myFlix!");
 });
 
+//----------------------MOVIES-----------------------------
+
 // Return all movies
 app.get(
   "/movies",
-  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.find()
       .then(movies => {
@@ -83,7 +92,6 @@ app.get(
 // Returns data about a single movie by title
 app.get(
   "/movies/:Title",
-  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.findOne({ Title: req.params.Title })
       .then(movie => {
@@ -99,9 +107,8 @@ app.get(
 // Returns data about a specific genre by genre name
 app.get(
   "/movies/genre/:Name",
-  passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ "Genre.Name": req.params.Name })
+    Movies.find({ "Genre.Name": req.params.Name })
       .then(movie => {
         res.json(movie.Genre.Name + ", " + movie.Genre.Description);
       })
@@ -114,21 +121,15 @@ app.get(
 
 app.get(
   "/movies/director/:Name",
-  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.findOne({ "Director.Name": req.params.Name })
       .then(movie => {
-        res.json(
-          "Name: " +
-            movie.Director.Name +
-            ". Bio: " +
-            movie.Director.Bio +
-            " Birth: " +
-            movie.Director.Birth +
-            ". Death: " +
-            movie.Director.Death +
-            "."
-        );
+        res.json({
+          Name: movie.Director.Name,
+          Bio: movie.Director.Bio,
+          Birth: movie.Director.Birth,
+          Death: movie.Director.Death
+        });
       })
       .catch(err => {
         console.error(err);
@@ -137,10 +138,12 @@ app.get(
   }
 );
 
+// -------------------------USERS-------------------------------------
+
 // GET all users
 app.get(
   "/users",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.find()
       .then(users => {
@@ -156,7 +159,7 @@ app.get(
 // GET a user by username
 app.get(
   "/users/:Username",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOne({ Username: req.params.Username })
       .then(user => {
