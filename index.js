@@ -5,7 +5,7 @@ const Models = require("./models.js");
 const Movies = Models.Movie;
 const Users = Models.User;
 
-Local database
+// Local database
 mongoose.connect("mongodb://localhost:27017/myFlixDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -340,7 +340,7 @@ app.delete(
 // -------------------------------------------------------------------
 
 //Logs every time you load a page
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8080;
 app.listen(port, "0.0.0.0", () => {
   console.log("Your app is listening on port " + port);
 });
