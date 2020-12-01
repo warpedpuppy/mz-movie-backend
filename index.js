@@ -5,13 +5,13 @@ const Models = require("./models.js");
 const Movies = Models.Movie;
 const Users = Models.User;
 
-//Local database
+// Local database
 // mongoose.connect("mongodb://localhost:27017/myFlixDB", {
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true
 // });
 
-Remote database
+// Remote database
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -22,14 +22,14 @@ const express = require("express"),
   bodyParser = require("body-parser");
 
 const app = express();
-const cors = require("cors");
+// const cors = require("cors");
 
 // app.use(cors());
 app.use(morgan("common"));
 app.use(express.static("public"));
 app.use(bodyParser.json());
 
-let auth = require("./auth")(app);
+// let auth = require("./auth")(app);
 
 const passport = require("passport");
 require("./passport");
@@ -43,13 +43,15 @@ let movies = [];
 let FavouriteMovies = [];
 
 //Allows all domains to make api requests
-let allowedOrigins = ["http://localhost:1234"];
+// let allowedOrigins = ["http://localhost:1234",
+//    "https://radiant-journey-16913.herokuapp.com/"];
+let allowedOrigins = ["*"];
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+// app.use(
+//   cors({
+//     origin: "*",
+//   })
+// );
 
 // app.use(
 //   cors({
@@ -336,7 +338,7 @@ app.delete(
 );
 
 //Logs every time you load a page
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8000;
 app.listen(port, "0.0.0.0", () => {
   console.log("Your app is listening on port " + port);
 });
