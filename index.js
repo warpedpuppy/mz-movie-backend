@@ -22,19 +22,19 @@ const express = require("express"),
   bodyParser = require("body-parser");
 
 const app = express();
-// const cors = require("cors");
+const cors = require("cors");
 
-// app.use(cors());
+app.use(cors());
 app.use(morgan("common"));
 app.use(express.static("public"));
 app.use(bodyParser.json());
 
-// let auth = require("./auth")(app);
+let auth = require("./auth")(app);
 
-// const passport = require("passport");
-// require("./passport");
+const passport = require("passport");
+require("./passport");
 
-// const { check, validationResult } = require("express-validator");
+const { check, validationResult } = require("express-validator");
 
 // All movies
 let movies = [];
@@ -46,11 +46,11 @@ let FavouriteMovies = [];
 let allowedOrigins = ["http://localhost:1234"];
 // let allowedOrigins = ["*"];
 
-// app.use(
-//   cors({
-//     origin: "*",
-//   })
-// );
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 // app.use(
 //   cors({
