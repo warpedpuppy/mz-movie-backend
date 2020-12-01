@@ -177,17 +177,17 @@ app.get(
 //Allow user to register
 app.post(
   "/users",
-  [
-    check("Username", "Username is required").isLength({ min: 5 }),
-    check(
-      "Username",
-      "Username contains non alphanumeric characters - not allowed"
-    ).isAlphanumeric(),
-    check("Password", "Password is required")
-      .not()
-      .isEmpty(),
-    check("Email", "Email does not appear to be valid").isEmail()
-  ],
+  // [
+  //   check("Username", "Username is required").isLength({ min: 5 }),
+  //   check(
+  //     "Username",
+  //     "Username contains non alphanumeric characters - not allowed"
+  //   ).isAlphanumeric(),
+  //   check("Password", "Password is required")
+  //     .not()
+  //     .isEmpty(),
+  //   check("Email", "Email does not appear to be valid").isEmail()
+  // ],
   (req, res) => {
     // check the validation object for errors
     let errors = validationResult(req);
@@ -228,18 +228,18 @@ app.post(
 // Updates a users info by username
 app.put(
   "/users/:Username",
-  passport.authenticate("jwt", { session: false }),
-  [
-    check("Username", "Username is required").isLength({ min: 5 }),
-    check(
-      "Username",
-      "Username contains non alphanumeric characters - not allowed,"
-    ).isAlphanumeric(),
-    check("Password", "Password is required")
-      .not()
-      .isEmpty(),
-    check("Email", "Email does not seem to be valid.").isEmail()
-  ],
+  // passport.authenticate("jwt", { session: false }),
+  // [
+  //   check("Username", "Username is required").isLength({ min: 5 }),
+  //   check(
+  //     "Username",
+  //     "Username contains non alphanumeric characters - not allowed,"
+  //   ).isAlphanumeric(),
+  //   check("Password", "Password is required")
+  //     .not()
+  //     .isEmpty(),
+  //   check("Email", "Email does not seem to be valid.").isEmail()
+  // ],
   (req, res) => {
     // check the validation object for errors
     let errors = validationResult(req);
@@ -274,7 +274,7 @@ app.put(
 //Add a movie to a users list of favourites
 app.post(
   "/users/:Username/Movies/:MovieID",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
@@ -297,7 +297,7 @@ app.post(
 //Remove a movie from a users list of favourites
 app.delete(
   "/users/:Username/Movies/:MovieID",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
@@ -320,7 +320,7 @@ app.delete(
 // Delete a user by username
 app.delete(
   "/users/:Username",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndRemove({ Username: req.params.Username })
       .then(user => {
@@ -336,6 +336,8 @@ app.delete(
       });
   }
 );
+
+// -------------------------------------------------------------------
 
 //Logs every time you load a page
 const port = process.env.PORT || 8000;
