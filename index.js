@@ -31,10 +31,10 @@ app.use(bodyParser.json());
 
 // let auth = require("./auth")(app);
 
-const passport = require("passport");
-require("./passport");
+// const passport = require("passport");
+// require("./passport");
 
-const { check, validationResult } = require("express-validator");
+// const { check, validationResult } = require("express-validator");
 
 // All movies
 let movies = [];
