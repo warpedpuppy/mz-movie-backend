@@ -43,9 +43,8 @@ let movies = [];
 let FavouriteMovies = [];
 
 //Allows all domains to make api requests
-// let allowedOrigins = ["http://localhost:1234",
-//    "https://radiant-journey-16913.herokuapp.com/"];
-let allowedOrigins = ["*"];
+let allowedOrigins = ["http://localhost:1234"];
+// let allowedOrigins = ["*"];
 
 // app.use(
 //   cors({
