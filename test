@@ -1,3 +1,34 @@
 mongoimport --uri mongodb+srv://MitchellZilberg:Stlouis26@mitchellzilberg.nwwhf.mongodb.net/myFlixDB --collection users_collection.json --type json --file /Users/Mitch/Desktop/Web_dev/careerfoundry/exported_collections/users_collection.json
 
 mongo "mongodb+srv://mitchellzilberg.nwwhf.mongodb.net/myFlixDB" --username MitchellZilberg
+
+
+db.movies.update(
+  { _id: ObjectId("5fb119b2b9d382068268beb7") },
+  { $set: {ImagePath: "https://m.media-amazon.com/images/M/MV5BMTA2NDYxOGYtYjU1Mi00Y2QzLTgxMTQtMWI1MGI0ZGQ5MmU4XkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_.jpg" }}
+)
+
+[
+   
+  
+
+    {
+        "Genre": {
+            "Name": "Crime",
+            "Description": "Set in the London criminal underworld, the film contains two intertwined plots: one dealing with the search for a stolen diamond, the other with a small-time boxing promoter (Jason Statham) who finds himself under the thumb of a ruthless gangster (Alan Ford) who is ready and willing to have his subordinates carry out severe and sadistic acts of violence."
+        },
+        "Director": {
+            "Name": "Guy Ritchie",
+            "Bio": "Guy Stuart Ritchie (born 10 September 1968)[1][2] is an English film director, producer, writer, and businessman. His work includes British gangster films and the Sherlock Holmes franchise.",
+            "Birth": "1968",
+            "Death": "-"
+        },
+        "Actors": [],
+        "_id": "5fb119b2b9d382068268beb7",
+        "Title": "Snatch",
+        "Description": "Snatch (stylized as snatch.) is a 2000 British crime comedy film written and directed by Guy Ritchie, featuring an ensemble cast. Set in the London criminal underworld, the film contains two intertwined plots: one dealing with the search for a stolen diamond, the other with a small-time boxing promoter (Jason Statham) who finds himself under the thumb of a ruthless gangster (Alan Ford) who is ready and willing to have his subordinates carry out severe and sadistic acts of violence.",
+        "ImagePath": "https://m.media-amazon.com/images/M/MV5BMTA2NDYxOGYtYjU1Mi00Y2QzLTgxMTQtMWI1MGI0ZGQ5MmU4XkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_.jpg",
+        "Featured": false
+    }
+]
+
