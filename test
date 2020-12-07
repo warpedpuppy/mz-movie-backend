@@ -9,9 +9,6 @@ db.movies.update(
 )
 
 [
-   
-  
-
     {
         "Genre": {
             "Name": "Crime",
@@ -31,4 +28,14 @@ db.movies.update(
         "Featured": false
     }
 ]
+
+db.users.insertOne()
+
+let userTest = {
+	"FavouriteMovies" : [ ],
+	"Username" : "testusernametest",
+	"Password" : "testpasswordtest",
+	"Email" : "testemail@gmail.com",
+	"Birthday" : 1999-06-10,
+}
 
