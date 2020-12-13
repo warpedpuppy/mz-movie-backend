@@ -106,7 +106,7 @@ app.get("/", (req, res) => {
 // Return all movies
 app.get(
   "/movies",
-  passport.authenticate('jwt', { session: false}), 
+  // passport.authenticate('jwt', { session: false}), 
   (req, res) => {
     Movies.find()
       .then(movies => {
@@ -122,7 +122,7 @@ app.get(
 // Returns data about a single movie by title
 app.get(
   "/movies/:Title",
-  passport.authenticate('jwt', { session: false}), 
+  // passport.authenticate('jwt', { session: false}), 
   (req, res) => {
     Movies.findOne({ Title: req.params.Title })
       .then(movie => {
@@ -139,7 +139,7 @@ app.get(
 // Returns data about a specific genre by genre name
 app.get(
   "/movies/genre/:Name",
-  passport.authenticate('jwt', { session: false}), 
+  // passport.authenticate('jwt', { session: false}), 
   (req, res) => {
     Movies.find({ "Genre.Name": req.params.Name })
       .then(movie => {
@@ -156,7 +156,7 @@ app.get(
 // Returns data about a specific director by genre name
 app.get(
   "/movies/director/:Name",
-  passport.authenticate('jwt', { session: false}), 
+  // passport.authenticate('jwt', { session: false}), 
   (req, res) => {
     Movies.findOne({ "Director.Name": req.params.Name })
       .then(movie => {
@@ -213,17 +213,17 @@ app.get(
 //Allow user to register
 app.post(
   "/users",
-  [
-    check("Username", "Username is required").isLength({ min: 5 }),
-    check(
-      "Username",
-      "Username contains non alphanumeric characters - not allowed"
-    ).isAlphanumeric(),
-    check("Password", "Password is required")
-      .not()
-      .isEmpty(),
-    check("Email", "Email does not appear to be valid").isEmail()
-  ],
+  // [
+  //   check("Username", "Username is required").isLength({ min: 5 }),
+  //   check(
+  //     "Username",
+  //     "Username contains non alphanumeric characters - not allowed"
+  //   ).isAlphanumeric(),
+  //   check("Password", "Password is required")
+  //     .not()
+  //     .isEmpty(),
+  //   check("Email", "Email does not appear to be valid").isEmail()
+  // ],
   (req, res) => {
     // check the validation object for errors
     let errors = validationResult(req);
@@ -265,7 +265,7 @@ app.post(
 // Updates a users info by username
 app.put(
   "/users/:Username",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   // [
   //   check("Username", "Username is required").isLength({ min: 5 }),
   //   check(
