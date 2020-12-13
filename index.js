@@ -70,7 +70,7 @@ let allowedOrigins = ["*"];
 // );
 
 function normalizeUser (user) {
-  const { _id: id, Username: username, Email: email, FavouriteMovies: favouriteMovies } = user;
+  const { _id: id, Username: username, Password: password, Email: email, FavouriteMovies: favouriteMovies } = user;
 
   return {
     id, username, email, favouriteMovies
