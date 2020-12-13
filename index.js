@@ -114,7 +114,7 @@ app.get(
       })
       .catch(err => {
         console.error(err);
-        res.status(500).send("Error: " + err.message + err.trace);
+        res.status(500).send("Error: " + err.message + err.stack);
       });
   }
 );
