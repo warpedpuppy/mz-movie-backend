@@ -133,7 +133,6 @@ app.get(
         console.error(err);
         res.status(500).send("Error: " + err);
       });
-      res.json(movies.map(normalizeMovie));
   }
 );
 
@@ -172,7 +171,6 @@ app.get(
         console.error(err);
         res.status(500).send("Error: " + err);
       });
-      res.json(movies.map(normalizeMovie));
   }
 );
 
@@ -185,13 +183,13 @@ app.get(
   (req, res) => {
     Users.find()
       .then(users => {
-        res.status(200).json(users);
+        // res.status(200).json(users);
+        res.json(normalizeUser(user));
       })
       .catch(err => {
         console.error(err);
         res.status(500).send("Error: " + err);
       });
-      res.json(normalizeUser(user));
   }
 );
 
