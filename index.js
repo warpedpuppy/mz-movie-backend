@@ -86,11 +86,11 @@ function normalizeMovie (movie) {
     Genre: {
       Name: genreName, Description: genreDescription
     } = {},
-    _id: id, Title: title, Description: description, ImagePath: imagePath, Featured: featured 
+    _id: id, Title: title, Description: movieDescription, ImagePath: imagePath, Featured: featured 
     } = movie;
 
   return {
-    id, title, description, imagePath, featured, genre: {name: genreName, description: genreDescription},
+    id, title, movieDescription, imagePath, featured, genre: {name: genreName, description: genreDescription},
     director: {name: directorName, bio: directorBio, birth: directorBirth, death: directorDeath}
   }
 }
