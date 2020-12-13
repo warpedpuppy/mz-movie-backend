@@ -98,7 +98,7 @@ function normalizeMovie (movie) {
 
 //Home page
 app.get("/", (req, res) => {
-  res.send("Welcome to myFlix!");
+  res.send("Version 1");
 });
 
 //----------------------MOVIES-----------------------------
