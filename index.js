@@ -79,9 +79,15 @@ function normalizeUser (user) {
 }
 
 function normalizeMovie (movie) {
-  const {Director: {Name: directorName, Bio: directorBio, Birth: directorBirth, Death: directorDeath}, 
-    Genre: {Name: genreName, Description: genreDescription},
-    _id: id, Title: title, ImagePath: imagePath, Featured: featured } = movie;
+  const {
+    Director: {
+      Name: directorName, Bio: directorBio, Birth: directorBirth, Death: directorDeath
+    } = {},
+    Genre: {
+      Name: genreName, Description: genreDescription
+    },
+    _id: id, Title: title, ImagePath: imagePath, Featured: featured 
+    } = {};
 
   return {
     id, title, imagePath, featured, genre: {name: genreName, description: genreDescription},
