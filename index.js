@@ -35,6 +35,7 @@ const passport = require("passport");
 require("./passport");
 
 const { check, validationResult } = require("express-validator");
+const { response } = require("express");
 
 // All movies
 let movies = [];
@@ -68,6 +69,27 @@ let allowedOrigins = ["*"];
 //   })
 // );
 
+function normalizeUser (user) {
+  const { _id: id, Username: username, Email: email, FavouriteMovies: favouriteMovies } = user;
+
+  return {
+    id, username, email, favouriteMovies
+  };
+  // response.json(normalizeUser(user));
+}
+
+function normalizeMovie (movie) {
+  const {Director: {Name: directorName, Bio: directorBio, Birth: directorBirth, Death: directorDeath}, 
+    Genre: {Name: genreName, Description: genreDescription},
+    _id: id, Title: title, ImagePath: imagePath, Featured: featured } = movie;
+
+  return {
+    id, title, imagePath, featured, genre: {name: genreName, description: genreDescription},
+    director: {name: directorName, bio: directorBio, birth: directorBirth, death: directorDeath}
+  }
+  // res.json(movies.map(normalizeMovie));
+}
+
 //Home page
 app.get("/", (req, res) => {
   res.send("Welcome to myFlix!");
@@ -88,6 +110,7 @@ app.get(
         console.error(err);
         res.status(500).send("Error: " + err);
       });
+      res.json(movies.map(normalizeMovie));
   }
 );
 
@@ -104,6 +127,7 @@ app.get(
         console.error(err);
         res.status(500).send("Error: " + err);
       });
+      res.json(movies.map(normalizeMovie));
   }
 );
 
@@ -120,6 +144,7 @@ app.get(
         console.error(err);
         res.status(500).send("Error: " + err);
       });
+      res.json(movies.map(normalizeMovie));
   }
 );
 
@@ -140,6 +165,7 @@ app.get(
         console.error(err);
         res.status(500).send("Error: " + err);
       });
+      res.json(movies.map(normalizeMovie));
   }
 );
 
@@ -158,6 +184,7 @@ app.get(
         console.error(err);
         res.status(500).send("Error: " + err);
       });
+      res.json(normalizeUser(user));
   }
 );
 
@@ -174,6 +201,7 @@ app.get(
         console.error(err);
         res.status(500).send("Error: " + err);
       });
+      res.json(normalizeUser(user));
   }
 );
 
@@ -225,6 +253,7 @@ app.post(
         console.error(error);
         res.status(500).send("Error: " + error);
       });
+      res.json(normalizeUser(user));
   }
 );
 
@@ -232,17 +261,17 @@ app.post(
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
-  [
-    check("Username", "Username is required").isLength({ min: 5 }),
-    check(
-      "Username",
-      "Username contains non alphanumeric characters - not allowed,"
-    ).isAlphanumeric(),
-    check("Password", "Password is required")
-      .not()
-      .isEmpty(),
-    check("Email", "Email does not seem to be valid.").isEmail()
-  ],
+  // [
+  //   check("Username", "Username is required").isLength({ min: 5 }),
+  //   check(
+  //     "Username",
+  //     "Username contains non alphanumeric characters - not allowed,"
+  //   ).isAlphanumeric(),
+  //   check("Password", "Password is required")
+  //     .not()
+  //     .isEmpty(),
+  //   check("Email", "Email does not seem to be valid.").isEmail()
+  // ],
   (req, res) => {
     // check the validation object for errors
     let errors = validationResult(req);
@@ -267,7 +296,8 @@ app.put(
           console.error(err);
           res.status(500).send("Error: " + err);
         } else {
-          res.json(updatedUser);
+          // res.json(updatedUser);
+          res.json(normalizeUser(updatedUser));
         }
       }
     );
@@ -290,7 +320,7 @@ app.post(
           console.error(err);
           res.status(500).send("Error: " + err);
         } else {
-          res.json(updatedUser);
+          res.json(normalizeUser(user));
         }
       }
     );
@@ -313,7 +343,8 @@ app.delete(
           console.error(err);
           res.status(500).send("Error: " + err);
         } else {
-          res.json(updatedUser);
+          // res.json(updatedUser);
+          res.json(normalizeUser(updatedUser));
         }
       }
     );
@@ -337,6 +368,7 @@ app.delete(
         console.error(err);
         res.status(500).send("Error: " + err);
       });
+      res.json(normalizeUser(user));
   }
 );
 
