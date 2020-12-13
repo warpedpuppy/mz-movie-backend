@@ -93,7 +93,7 @@ function normalizeMovie (movie) {
     id, title, imagePath, featured, genre: {name: genreName, description: genreDescription},
     director: {name: directorName, bio: directorBio, birth: directorBirth, death: directorDeath}
   }
-  // res.json(movies.map(normalizeMovie));
+  res.status(500).send("Error: " + err.message + err.trace);
 }
 
 //Home page
@@ -114,7 +114,7 @@ app.get(
       })
       .catch(err => {
         console.error(err);
-        res.status(500).send("Error: " + err);
+        res.status(500).send("Error: " + err.message + err.trace);
       });
   }
 );
