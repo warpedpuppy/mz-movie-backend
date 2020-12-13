@@ -100,28 +100,28 @@ app.get("/", (req, res) => {
 // Return all movies
 app.get(
   "/movies",
-  // passport.authenticate('jwt', { session: false}), 
+  passport.authenticate('jwt', { session: false}), 
   (req, res) => {
     Movies.find()
       .then(movies => {
-        res.status(200).json(movies);
+        res.json(movies.map(normalizeMovie));
       })
       .catch(err => {
         console.error(err);
         res.status(500).send("Error: " + err);
       });
-      res.json(movies.map(normalizeMovie));
   }
 );
 
 // Returns data about a single movie by title
 app.get(
   "/movies/:Title",
-  // passport.authenticate('jwt', { session: false}), 
+  passport.authenticate('jwt', { session: false}), 
   (req, res) => {
     Movies.findOne({ Title: req.params.Title })
       .then(movie => {
-        res.json(movie);
+        // res.json(movie);
+        res.json(normalizeMovie(movie));
       })
       .catch(err => {
         console.error(err);
@@ -134,23 +134,24 @@ app.get(
 // Returns data about a specific genre by genre name
 app.get(
   "/movies/genre/:Name",
-  // passport.authenticate('jwt', { session: false}), 
+  passport.authenticate('jwt', { session: false}), 
   (req, res) => {
     Movies.find({ "Genre.Name": req.params.Name })
       .then(movie => {
-        res.json(movie.Genre.Name + ", " + movie.Genre.Description);
+        // res.json(movie.Genre.Name + ", " + movie.Genre.Description);
+        res.json(normalizeMovie(movie));
       })
       .catch(err => {
         console.error(err);
         res.status(500).send("Error: " + err);
       });
-      res.json(movies.map(normalizeMovie));
   }
 );
 
+// Returns data about a specific director by genre name
 app.get(
   "/movies/director/:Name",
-  // passport.authenticate('jwt', { session: false}), 
+  passport.authenticate('jwt', { session: false}), 
   (req, res) => {
     Movies.findOne({ "Director.Name": req.params.Name })
       .then(movie => {
