@@ -49,11 +49,11 @@ let FavouriteMovies = [];
 // let allowedOrigins = ["http://localhost:1234"];
 let allowedOrigins = ["*"];
 
-// app.use(
-//   cors({
-//     origin: "*",
-//   })
-// );
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 // app.use(
 //   cors({
