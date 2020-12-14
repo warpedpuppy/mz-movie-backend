@@ -73,7 +73,7 @@ function normalizeUser (user) {
   const { _id: id, Username: username, Password: password, Email: email, FavouriteMovies: favouriteMovies } = user;
 
   return {
-    id, username, email, favouriteMovies
+    id, username, email, password, favouriteMovies
   };
   // response.json(normalizeUser(user));
 }
@@ -199,13 +199,12 @@ app.get(
   (req, res) => {
     Users.findOne({ Username: req.params.Username })
       .then(user => {
-        res.json(user);
+        res.json(normalizeUser(user));
       })
       .catch(err => {
         console.error(err);
         res.status(500).send("Error: " + err);
-      });
-      res.json(normalizeUser(user));
+      });     
   }
 );
 
@@ -245,7 +244,7 @@ app.post(
             Birthday: req.body.Birthday
           })
             .then(user => {
-              res.status(200).json(user);
+              res.json(normalizeUser(user));
             })
             .catch(error => {
               console.error(error);
@@ -257,7 +256,6 @@ app.post(
         console.error(error);
         res.status(500).send("Error: " + error);
       });
-      res.json(normalizeUser(user));
   }
 );
 
@@ -324,7 +322,7 @@ app.post(
           console.error(err);
           res.status(500).send("Error: " + err);
         } else {
-          res.json(normalizeUser(user));
+          res.json(normalizeUser(user)); //Why problematic? 
         }
       }
     );
@@ -365,14 +363,14 @@ app.delete(
         if (!user) {
           res.status(400).send(req.params.Username + " was not found.");
         } else {
-          res.status(200).send(req.params.Username + " was deleted.");
+          res.json(normalizeUser(user));
+          // res.status(200).send(req.params.Username + " was deleted.");
         }
       })
       .catch(err => {
         console.error(err);
         res.status(500).send("Error: " + err);
       });
-      res.json(normalizeUser(user));
   }
 );
 
