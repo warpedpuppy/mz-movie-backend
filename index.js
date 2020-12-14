@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 //Dependencies
 const mongoose = require("mongoose");
 const Models = require("./models.js");
@@ -192,10 +194,11 @@ app.get(
   }
 );
 
+// passport.authenticate("jwt", { session: false }),
 // GET a user by username
 app.get(
   "/users/:Username",
-  passport.authenticate("jwt", { session: false }),
+
   (req, res) => {
     Users.findOne({ Username: req.params.Username })
       .then(user => {
