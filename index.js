@@ -99,7 +99,7 @@ function normalizeMovie (movie) {
 
 //Home page
 app.get("/", (req, res) => {
-  res.send("Version 1");
+  res.send("Version 2");
 });
 
 //----------------------MOVIES-----------------------------
