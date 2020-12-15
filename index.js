@@ -88,11 +88,11 @@ function normalizeMovie (movie) {
     Genre: {
       Name: genreName, Description: genreDescription
     } = {},
-    _id: id, Title: title, Description: movieDescription, ImagePath: imagePath, Featured: featured 
+    _id: id, Title: title, Despcription: description, ImagePath: imagePath, Featured: featured 
     } = movie;
 
   return {
-    id, title, movieDescription, imagePath, featured, genre: {name: genreName, description: genreDescription},
+    id, title, description, imagePath, featured, genre: {name: genreName, description: genreDescription},
     director: {name: directorName, bio: directorBio, birth: directorBirth, death: directorDeath}
   }
 }
@@ -194,11 +194,10 @@ app.get(
   }
 );
 
-// passport.authenticate("jwt", { session: false }),
 // GET a user by username
 app.get(
   "/users/:Username",
-
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOne({ Username: req.params.Username })
       .then(user => {
@@ -214,17 +213,17 @@ app.get(
 //Allow user to register
 app.post(
   "/users",
-  // [
-  //   check("Username", "Username is required").isLength({ min: 5 }),
-  //   check(
-  //     "Username",
-  //     "Username contains non alphanumeric characters - not allowed"
-  //   ).isAlphanumeric(),
-  //   check("Password", "Password is required")
-  //     .not()
-  //     .isEmpty(),
-  //   check("Email", "Email does not appear to be valid").isEmail()
-  // ],
+  [
+    check("Username", "Username is required").isLength({ min: 5 }),
+    check(
+      "Username",
+      "Username contains non alphanumeric characters - not allowed"
+    ).isAlphanumeric(),
+    check("Password", "Password is required")
+      .not()
+      .isEmpty(),
+    check("Email", "Email does not appear to be valid").isEmail()
+  ],
   (req, res) => {
     // check the validation object for errors
     let errors = validationResult(req);
