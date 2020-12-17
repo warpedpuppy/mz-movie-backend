@@ -225,7 +225,7 @@ app.post(
     check("email", "Email does not appear to be valid").isEmail()
   ],
   (req, res) => {
-
+    console.log(req.body)
     // check the validation object for errors
     let errors = validationResult(req);
 
@@ -233,26 +233,25 @@ app.post(
       return res.status(422).json({ errors: errors.array() });
     }
 
-    let hashedPassword = Users.hashPassword(req.body.password);
-    Users.findOne({ Username: req.body.username }) // Search to see if a user with the requested username already exists
+    let hashedPassword = Users.hashPassword(req.body.Password);
+    Users.findOne({ Username: req.body.Username }) // Search to see if a user with the requested username already exists
       .then(user => {
-
         if (user) {
           //If the user is found, send a response that it already exists
           return res.status(400).send(req.body.Username + "already exists");
         } else {
           Users.create({
-            Username: req.body.username,
+            Username: req.body.Username,
             Password: hashedPassword,
-            Email: req.body.email,
-            Birthday: req.body.birthday
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
           })
             .then(user => {
               res.json(normalizeUser(user));
             })
             .catch(error => {
               console.error(error);
-              res.sendStatus(500).send("Error: " + error);
+              res.send(500).send("Error: " + error);
             });
         }
       })
