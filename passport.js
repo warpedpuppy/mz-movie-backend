@@ -8,6 +8,7 @@ let Users = Models.User,
   ExtractJWT = passportJWT.ExtractJwt;
 
 passport.use(
+  
   new LocalStrategy(
     {
       usernameField: "Username",

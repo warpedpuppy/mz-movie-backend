@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+const jwt = require('jsonwebtoken')
 //Dependencies
 const mongoose = require("mongoose");
 const Models = require("./models.js");
@@ -239,7 +239,7 @@ app.post(
 
         if (user) {
           //If the user is found, send a response that it already exists
-          return res.status(400).send(req.body.Username + "already exists");
+          return res.status(400).send(req.body.username + "already exists");
         } else {
           Users.create({
             Username: req.body.username,
@@ -312,7 +312,7 @@ app.put(
 
 //Add a movie to a users list of favourites
 app.post(
-  "/users/:Username/Movies/:MovieID",
+  "/users/:Username/movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
@@ -326,7 +326,7 @@ app.post(
           console.error(err);
           res.status(500).send("Error: " + err);
         } else {
-          res.json(normalizeUser(user)); //Why problematic? 
+          res.json(normalizeUser(updatedUser)); //Why problematic? 
         }
       }
     );
