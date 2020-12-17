@@ -49,11 +49,11 @@ let FavouriteMovies = [];
 // let allowedOrigins = ["http://localhost:1234"];
 let allowedOrigins = ["*"];
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+// app.use(
+//   cors({
+//     origin: "*",
+//   })
+// );
 
 // app.use(
 //   cors({
@@ -72,6 +72,7 @@ app.use(
 // );
 
 function normalizeUser (user) {
+  console.log(user);
   const { _id: id, Username: username, Password: password, Email: email, FavouriteMovies: favouriteMovies } = user;
 
   return {
@@ -107,7 +108,7 @@ app.get("/", (req, res) => {
 // Return all movies
 app.get(
   "/movies",
-  passport.authenticate('jwt', { session: false}), 
+  // passport.authenticate('jwt', { session: false}), 
   (req, res) => {
     Movies.find()
       .then(movies => {
@@ -123,7 +124,7 @@ app.get(
 // Returns data about a single movie by title
 app.get(
   "/movies/:Title",
-  passport.authenticate('jwt', { session: false}), 
+  // passport.authenticate('jwt', { session: false}), 
   (req, res) => {
     Movies.findOne({ Title: req.params.Title })
       .then(movie => {
@@ -140,7 +141,7 @@ app.get(
 // Returns data about a specific genre by genre name
 app.get(
   "/movies/genre/:Name",
-  passport.authenticate('jwt', { session: false}), 
+  // passport.authenticate('jwt', { session: false}), 
   (req, res) => {
     Movies.find({ "Genre.Name": req.params.Name })
       .then(movie => {
@@ -157,7 +158,7 @@ app.get(
 // Returns data about a specific director by genre name
 app.get(
   "/movies/director/:Name",
-  passport.authenticate('jwt', { session: false}), 
+  // passport.authenticate('jwt', { session: false}), 
   (req, res) => {
     Movies.findOne({ "Director.Name": req.params.Name })
       .then(movie => {
@@ -180,7 +181,7 @@ app.get(
 // GET all users
 app.get(
   "/users",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.find()
       .then(users => {
@@ -197,7 +198,7 @@ app.get(
 // GET a user by username
 app.get(
   "/users/:Username",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOne({ Username: req.params.Username })
       .then(user => {
@@ -264,7 +265,7 @@ app.post(
 // Updates a users info by username
 app.put(
   "/users/:Username",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   // [
   //   check("Username", "Username is required").isLength({ min: 5 }),
   //   check(
@@ -311,7 +312,7 @@ app.put(
 //Add a movie to a users list of favourites
 app.post(
   "/users/:Username/Movies/:MovieID",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
@@ -324,7 +325,7 @@ app.post(
           console.error(err);
           res.status(500).send("Error: " + err);
         } else {
-          res.json(normalizeUser(user)); //Why problematic? 
+          res.json(normalizeUser(updatedUser)); //Why problematic? 
         }
       }
     );
@@ -334,7 +335,7 @@ app.post(
 //Remove a movie from a users list of favourites
 app.delete(
   "/users/:Username/Movies/:MovieID",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndUpdate(
       { Username: req.params.Username },
@@ -358,7 +359,7 @@ app.delete(
 // Delete a user by username
 app.delete(
   "/users/:Username",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOneAndRemove({ Username: req.params.Username })
       .then(user => {
@@ -389,3 +390,4 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
+
