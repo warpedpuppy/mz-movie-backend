@@ -244,8 +244,8 @@ app.post(
           Users.create({
             Username: req.body.username,
             Password: hashedPassword,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday
+            Email: req.body.email,
+            Birthday: req.body.birthday
           })
             .then(user => {
               res.json(normalizeUser(user));
