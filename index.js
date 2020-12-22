@@ -280,20 +280,22 @@ app.put(
   // ],
   (req, res) => {
     // check the validation object for errors
+    console.log('req.body = ', req.body);
     let errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
 
+
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
         $set: {
-          Username: req.body.Username,
-          Password: req.body.Password,
-          Email: req.body.Email,
-          Birthday: req.body.Birthday
+          Username: req.body.username,
+          Password: req.body.password,
+          Email: req.body.email,
+          Birthday: req.body.birthday
         }
       },
       { new: true }, //This line makes sure that the updated document is returned
