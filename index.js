@@ -73,11 +73,11 @@ let FavouriteMovies = [];
 // );
 
 function normalizeUser (user) {
-  console.log(user);
-  const { _id: id, Username: username, Password: password, Email: email, FavouriteMovies: favouriteMovies } = user;
+
+  const { _id: id, Username: username, Password: password, Email: email, FavouriteMovies: favouriteMovies, Birthday: birthday } = user;
 
   return {
-    id, username, email, password, favouriteMovies
+    id, username, email, password, favouriteMovies, birthday
   };
   // response.json(normalizeUser(user));
 }
@@ -267,26 +267,12 @@ app.post(
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
-  // [
-  //   check("Username", "Username is required").isLength({ min: 5 }),
-  //   check(
-  //     "Username",
-  //     "Username contains non alphanumeric characters - not allowed,"
-  //   ).isAlphanumeric(),
-  //   check("Password", "Password is required")
-  //     .not()
-  //     .isEmpty(),
-  //   check("Email", "Email does not seem to be valid.").isEmail()
-  // ],
   (req, res) => {
-    // check the validation object for errors
-    console.log('req.body = ', req.body);
-    let errors = validationResult(req);
-
+    
+    let errors = validationResult(req); 
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-
 
     Users.findOneAndUpdate(
       { Username: req.params.Username },
